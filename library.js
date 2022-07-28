@@ -49,6 +49,7 @@ const plugin = {
 		noRegistration: 'off',
 		payloadParent: undefined,
 		allowBannedUsers: false,
+		useUserObject: 'off',
 	},
 };
 
@@ -205,13 +206,18 @@ plugin.findOrCreateUser = async (userData) => {
 	const { id } = userData;
 	let isNewUser = false;
 	let userId = null;
-	let queries = [db.sortedSetScore(plugin.settings.name + ':uid', userData.id)];
+	let [uid, mergeUid] = await (async () => {
+		if (plugin.settings.useUserObject === 'on')
+			return [id];
 
-	if (userData.email && userData.email.length) {
-		queries = [...queries, db.sortedSetScore('email:uid', userData.email)];
-	}
+		const queries = [db.sortedSetScore(plugin.settings.name + ':uid', userData.id)];
 
-	let [uid, mergeUid] = await Promise.all(queries);
+		if (userData.email && userData.email.length)
+			return Promise.all( [...queries, db.sortedSetScore('email:uid', userData.email)] );
+
+		return Promise.all( queries );
+	})();
+	
 	uid = parseInt(uid, 10);
 	mergeUid = parseInt(mergeUid, 10);
 

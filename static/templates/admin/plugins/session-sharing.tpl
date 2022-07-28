@@ -50,19 +50,29 @@
 						</select>
 					</div>
 					<div class="checkbox">
-							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
-								<input class="mdl-switch__input" type="checkbox" id="adminRevalidate" name="adminRevalidate" />
-								<span class="mdl-switch__label"><strong>Apply revalidation rules to administrators as well</strong></span>
-							</label>
-							<p class="help-block">
-								Administrators are exempt from the <code>revalidate</code> behaviour because a
-								misconfiguration could lock them out of the admin panel. Enable this option to force
-								administrators to also undergo cookie revalidation, and thereby increasing security.
-							</p>
-							<p class="help-block">
-								This option is disabled by default to allow for smoother setup.
-							</p>
-						</div>
+						<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+							<input class="mdl-switch__input" type="checkbox" id="adminRevalidate" name="adminRevalidate" />
+							<span class="mdl-switch__label"><strong>Apply revalidation rules to administrators as well</strong></span>
+						</label>
+						<p class="help-block">
+							Administrators are exempt from the <code>revalidate</code> behaviour because a
+							misconfiguration could lock them out of the admin panel. Enable this option to force
+							administrators to also undergo cookie revalidation, and thereby increasing security.
+						</p>
+						<p class="help-block">
+							This option is disabled by default to allow for smoother setup.
+						</p>
+					</div>
+					<div class="checkbox">
+						<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+							<input class="mdl-switch__input" type="checkbox" id="useUserObject" name="useUserObject" />
+							<span class="mdl-switch__label"><strong>Lookup the uid in User object</strong></span>
+						</label>
+						<p class="help-block">
+							By default, the user id found in the payload cookie is looked up in the object defined by the Base Name option.
+							If enabled, the User object will be queried for the user id if not found in the Base Name object.
+						</p>
+					</div>
 					<div class="checkbox">
 						<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
 							<input class="mdl-switch__input" type="checkbox" id="noRegistration" name="noRegistration" />
